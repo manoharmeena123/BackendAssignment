@@ -27,6 +27,7 @@ memberRouter.post("/create", authorise(["admin","user"]),async(req,res)=>{
         res.send("error in Post")
     }
 })
+//PATCH=====================================================>
 memberRouter.patch("/update/:noteID",authorise(["admin","user"]) ,async(req,res)=>{
     const noteID = req.params.noteID
     const userID = req.body.userID
@@ -45,7 +46,8 @@ memberRouter.patch("/update/:noteID",authorise(["admin","user"]) ,async(req,res)
         res.send("error in patch")
     }
 })
-//PATCH=====================================================>
+
+//DELETE====================================================>
 memberRouter.delete("/delete/:noteID", authorise(["admin","user"]) , async(req, res) => {
     const noteID = req.params.noteID
     const userID = req.body.userID
@@ -59,19 +61,7 @@ memberRouter.delete("/delete/:noteID", authorise(["admin","user"]) , async(req, 
     }
 })
 
-//DELETE====================================================>
 
-memberRouter.delete("/delete/:Id",authorise(["admin","user"]) ,async(req,res)=>{
-    const Id = req.params.Id
-    try {
-        const data =  await   MemberModel.findByIdAndDelete({_id:Id})
-    
-    res.send("Data Deleted Successfully")
-    } catch (error) {
-        console.log(Error)
-        res.send("error in Delete")
-    }
-})
 
 module.exports ={
     memberRouter

@@ -28,6 +28,8 @@ communityRouter.post("/create", authorise(["admin","user"]),async(req,res)=>{
         res.send("error in Post")
     }
 })
+
+//PATCH=====================================================>
 communityRouter.patch("/update/:noteID",authorise(["admin","user"]) ,async(req,res)=>{
     const noteID = req.params.noteID
     const userID = req.body.userID
@@ -46,7 +48,7 @@ communityRouter.patch("/update/:noteID",authorise(["admin","user"]) ,async(req,r
         res.send("error in patch")
     }
 })
-//PATCH=====================================================>
+//DELETE====================================================>
 communityRouter.delete("/delete/:noteID", authorise(["admin","user"]) , async(req, res) => {
     const noteID = req.params.noteID
     const userID = req.body.userID
@@ -60,19 +62,7 @@ communityRouter.delete("/delete/:noteID", authorise(["admin","user"]) , async(re
     }
 })
 
-//DELETE====================================================>
 
-communityRouter.delete("/delete/:Id",authorise(["admin","user"]) ,async(req,res)=>{
-    const Id = req.params.Id
-    try {
-        const data =  await CommunityModel.findByIdAndDelete({_id:Id})
-    
-    res.send("Data Deleted Successfully")
-    } catch (error) {
-        console.log(Error)
-        res.send("error in Delete")
-    }
-})
 
 module.exports ={
     communityRouter

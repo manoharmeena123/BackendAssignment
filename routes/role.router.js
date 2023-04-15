@@ -27,6 +27,7 @@ roleRouter.post("/create", authorise(["admin","user"]),async(req,res)=>{
         res.send("error in Post")
     }
 })
+//PATCH=====================================================>
 roleRouter.patch("/update/:noteID",authorise(["admin","user"]) ,async(req,res)=>{
     const noteID = req.params.noteID
     const userID = req.body.userID
@@ -45,7 +46,7 @@ roleRouter.patch("/update/:noteID",authorise(["admin","user"]) ,async(req,res)=>
         res.send("error in patch")
     }
 })
-//PATCH=====================================================>
+//DELETE====================================================>
 roleRouter.delete("/delete/:noteID", authorise(["admin","user"]) , async(req, res) => {
     const noteID = req.params.noteID
     const userID = req.body.userID
@@ -59,19 +60,6 @@ roleRouter.delete("/delete/:noteID", authorise(["admin","user"]) , async(req, re
     }
 })
 
-//DELETE====================================================>
-
-roleRouter.delete("/delete/:Id",authorise(["admin","user"]) ,async(req,res)=>{
-    const Id = req.params.Id
-    try {
-        const data =  await   RoleModel.findByIdAndDelete({_id:Id})
-    
-    res.send("Data Deleted Successfully")
-    } catch (error) {
-        console.log(Error)
-        res.send("error in Delete")
-    }
-})
 
 module.exports ={
     roleRouter
